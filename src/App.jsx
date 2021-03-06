@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import useAuth from './useAuth';
 import Home from './Home';
 import SignIn from './SignIn';
+import ToDoList from './ToDoList';
 
 export default function App() {
   return (
@@ -24,17 +25,17 @@ export default function App() {
 function Auth() {
   const auth = useAuth();
 
-  React.useEffect(() => {
-    if (!auth) {
-      window.location = '/non-auth/sign-in';
-    }
-  }, [auth]);
+  if (!auth) window.location = 'non-auth/sign-in';
 
   return (
     <Router>
       <Switch>
         <Route exact path="/">
           <Home />
+        </Route>
+
+        <Route path="/current-user/待处理">
+          <ToDoList />
         </Route>
       </Switch>
     </Router>
