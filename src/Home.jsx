@@ -4,8 +4,7 @@ import dayjs from 'dayjs';
 import TopNav from './TopNav';
 import LeftNav from './LeftNav';
 import BottomNav from './BottomNav';
-import useAuth from './useAuth';
-import { reducer } from './miscellaneous';
+import { reducer, useAuth } from './miscellaneous';
 
 const initial_state = {
   candidate_today: 0,

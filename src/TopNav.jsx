@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHome, faEnvelope, faUserCircle } from '@fortawesome/free-solid-svg-icons';
 
-import useMessageQty from './useMessageQty';
+import { useMessageQty } from './miscellaneous';
 
 export default function TopNav({ component_option, component_param_name }) {
   const message_qty = useMessageQty({ user_id: 0, user_uuid: '' });

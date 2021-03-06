@@ -1,23 +1,27 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSearch, faSyncAlt } from '@fortawesome/free-solid-svg-icons';
+import {
+  faSearch,
+  faSyncAlt,
+  faEdit,
+  faEnvelope,
+  faMobileAlt,
+} from '@fortawesome/free-solid-svg-icons';
 
 import TopNav from './TopNav';
 import LeftNav from './LeftNav';
 import BottomNav from './BottomNav';
-import useMessageQty from './useMessageQty';
-import useAuth from './useAuth';
+import { useAuth } from './miscellaneous';
 
-export default function EmployerUserList() {
+export default function CandidateList() {
   const auth = useAuth();
-  const message_qty = useMessageQty({ user_id: 0, user_uuid: '' });
-  const [list, setList] = useState([]);
-  const [keyword, setKeyword] = useState('');
+  const [data, setData] = React.useState([]);
+  const [keyword, setKeyword] = React.useState('');
 
   const handleFilter = async () => {
-    setList([]);
-    fetch('/api/employer/filter?option=hypervisor', {
+    setData([]);
+    fetch('/api/candidate/filter?option=hypervisor', {
       method: 'PUT',
       headers: {
         'content-type': 'application/json',
@@ -31,7 +35,7 @@ export default function EmployerUserList() {
         else return response.json();
       })
       .then((data) => {
-        setList(data);
+        setData(data);
       })
       .catch((err) => {
         console.error(err.stack);
@@ -49,7 +53,7 @@ export default function EmployerUserList() {
           <div className="row h-100 d-flex justify-content-center">
             <div className="col-3 col-lg-2">
               <div className="card bg-dark h-100">
-                <LeftNav component_option="企业" />
+                <LeftNav component_option="个人用户" />
               </div>
             </div>
 
@@ -61,31 +65,24 @@ export default function EmployerUserList() {
                       type="button"
                       className="btn btn-link text-reset text-decoration-none"
                       onClick={() => {
-                        window.history.go(-1);
+                        window.history.back();
                       }}
                     >
                       返回
                     </button>
                   </div>
-                  <span className="h1">企业</span>
+                  <span className="h1">个人用户</span>
                   <nav>
                     <ol className="breadcrumb transparent">
                       <li className="breadcrumb-item">
-                        <a href="home.html" className="text-reset text-decoration-none">
+                        <Link to="/" className="text-reset text-decoration-none">
                           首页
-                        </a>
+                        </Link>
                       </li>
-                      <li className="breadcrumb-item active">企业</li>
+                      <li className="breadcrumb-item active">个人用户</li>
                     </ol>
                   </nav>
                 </div>
-
-                {parseInt(message_qty) > 0 && (
-                  <div className="alert alert-warning">
-                    有 {message_qty} 个待认证企业需要
-                    <Link to="/current-user/待处理">处理</Link>。
-                  </div>
-                )}
 
                 <div className="card shadow bg-dark h-100 flex-grow-1">
                   <div className="card-header">
@@ -93,65 +90,72 @@ export default function EmployerUserList() {
                       <div className="col">
                         <div className="input-group">
                           <div className="input-group-prepend">
-                            <span className="input-group-text">名称/电话</span>
+                            <span className="input-group-text">姓名/电话</span>
                           </div>
+
                           <input
                             type="text"
                             value={keyword}
+                            aria-label="企业名称"
                             className="form-control"
                             onChange={(event) => setKeyword(event.target.value)}
                           />
                         </div>
                       </div>
 
-                      <div className="btn-group col-auto">
-                        <button type="button" className="btn btn-info" onClick={handleFilter}>
-                          <FontAwesomeIcon icon={faSearch} fixedWidth size="lg" />
-                          查询
-                        </button>
+                      <div className="col-auto">
+                        <div className="btn-group">
+                          <button type="button" className="btn btn-info" onClick={handleFilter}>
+                            <FontAwesomeIcon icon={faSearch} fixedWidth size="lg" />
+                            查询
+                          </button>
 
-                        <button
-                          type="button"
-                          className="btn btn-secondary"
-                          onClick={() => {
-                            window.location.reload();
-                          }}
-                        >
-                          <FontAwesomeIcon icon={faSyncAlt} fixedWidth size="lg" />
-                          重置
-                        </button>
+                          <button
+                            type="button"
+                            className="btn btn-secondary"
+                            onClick={() => {
+                              window.reload(true);
+                            }}
+                          >
+                            <FontAwesomeIcon icon={faSyncAlt} fixedWidth size="lg" />
+                            重置
+                          </button>
+                        </div>
                       </div>
                     </div>
                   </div>
 
-                  <div className="card-body">
+                  <div className="card-body table-responsive">
                     <table className="table table-dark table-striped">
-                      <caption>企业用户</caption>
                       <thead>
                         <tr>
                           <th className="text-right">序号</th>
-                          <th>企业</th>
+                          <th>用户</th>
+                          <th>EMAIL</th>
                           <th>电话</th>
-                          <th>操作</th>
                         </tr>
                       </thead>
 
                       <tbody>
-                        {list.map((it) => (
+                        {data.map((it) => (
                           <tr key={it.id}>
-                            <td className="text-right">{it.id}</td>
-                            <td>{it.name}</td>
-                            <td>{it.phone}</td>
-                            <td>
-                              <a href={`#/${it.id}?uuid=${it.uuid}`} className="float-left">
-                                企业用户
-                              </a>
-                              &nbsp;/&nbsp;
-                              <a
-                                href={`enterprise.html#/${it.enterprise_id}?uuid=${it.enterprise_uuid}`}
+                            <td className="text-right">
+                              <Link
+                                to={`/candidate/${it.id}?uuid=${it.uuid}`}
+                                className="float-left"
                               >
-                                信息
-                              </a>
+                                <FontAwesomeIcon icon={faEdit} fixedWidth size="lg" />
+                              </Link>
+                              <span className="float-right">{it.id}</span>
+                            </td>
+                            <td>{it.name}</td>
+                            <td>
+                              <FontAwesomeIcon icon={faEnvelope} fixedWidth size="lg" />
+                              {it.email}
+                            </td>
+                            <td>
+                              <FontAwesomeIcon icon={faMobileAlt} fixedWidth size="lg" />
+                              {it.phone}
                             </td>
                           </tr>
                         ))}

@@ -5,7 +5,7 @@ import TopNav from './TopNav';
 import LeftNav from './LeftNav';
 import BottomNav from './BottomNav';
 import ComponentCertificateList from './ComponentCertificateList';
-import useAuth from './useAuth';
+import { useAuth } from './miscellaneous';
 
 export default function ToDoList() {
   const auth = useAuth();

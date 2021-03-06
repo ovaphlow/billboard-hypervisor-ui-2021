@@ -75,20 +75,20 @@ export default function LeftNav({ component_option }) {
       </li>
       <hr />
       <li className="nav-item">
-        <Link to="/employer-user" className="nav-link text-reset text-decoration-none">
-          {component_option === '企业' ? (
+        <Link to="/employer" className="nav-link text-reset text-decoration-none">
+          {component_option === '企业用户' ? (
             <strong>
               <FontAwesomeIcon icon={faChevronRight} fixedWidth size="lg" />
               {component_option}
               <FontAwesomeIcon icon={faChevronLeft} fixedWidth size="lg" />
             </strong>
           ) : (
-            <span>企业</span>
+            <span>企业用户</span>
           )}
         </Link>
       </li>
       <li className="nav-item">
-        <a href="common-user.html" className="nav-link text-reset text-decoration-none">
+        <Link to="/candidate" className="nav-link text-reset text-decoration-none">
           {component_option === '个人用户' ? (
             <strong>
               <FontAwesomeIcon icon={faChevronRight} fixedWidth size="lg" />
@@ -98,7 +98,7 @@ export default function LeftNav({ component_option }) {
           ) : (
             <span>个人用户</span>
           )}
-        </a>
+        </Link>
       </li>
       <li className="nav-item">
         <a href="staff.html" className="nav-link text-reset text-decoration-none">

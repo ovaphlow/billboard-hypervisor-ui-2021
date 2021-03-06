@@ -1,11 +1,13 @@
 import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
-import useAuth from './useAuth';
+import { useAuth } from './miscellaneous';
 import Home from './Home';
 import SignIn from './SignIn';
 import ToDoList from './ToDoList';
-import EmployerUserList from './EmployerUserList';
+import EmployerList from './EmployerList';
+import CandidateList from './CandidateList';
+import Candidate from './Candidate';
 
 export default function App() {
   return (
@@ -39,8 +41,16 @@ function Auth() {
           <ToDoList />
         </Route>
 
-        <Route exact path="/employer-user">
-          <EmployerUserList />
+        <Route exact path="/candidate">
+          <CandidateList />
+        </Route>
+
+        <Route path="/candidate/:id">
+          <Candidate />
+        </Route>
+
+        <Route exact path="/employer">
+          <EmployerList />
         </Route>
       </Switch>
     </Router>
