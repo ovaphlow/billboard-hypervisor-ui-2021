@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 import TopNav from './TopNav';
 import LeftNav from './LeftNav';
@@ -60,12 +61,12 @@ export default function ToDoList() {
                   <nav>
                     <ol className="breadcrumb transparent">
                       <li className="breadcrumb-item">
-                        <a href="home.html" className="text-reset text-decoration-none">
+                        <Link to="/" className="text-reset text-decoration-none">
                           首页
-                        </a>
+                        </Link>
                       </li>
                       <li className="breadcrumb-item">
-                        <a href="current-user.html" className="text-reset text-decoration-none">
+                        <a href="/current-user" className="text-reset text-decoration-none">
                           当前用户
                         </a>
                       </li>

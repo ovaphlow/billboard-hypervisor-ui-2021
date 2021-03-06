@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -74,17 +75,17 @@ export default function LeftNav({ component_option }) {
       </li>
       <hr />
       <li className="nav-item">
-        <a href="enterprise-user.html" className="nav-link text-reset text-decoration-none">
-          {component_option === '企业用户' ? (
+        <Link to="/employer-user" className="nav-link text-reset text-decoration-none">
+          {component_option === '企业' ? (
             <strong>
               <FontAwesomeIcon icon={faChevronRight} fixedWidth size="lg" />
               {component_option}
               <FontAwesomeIcon icon={faChevronLeft} fixedWidth size="lg" />
             </strong>
           ) : (
-            <span>企业用户</span>
+            <span>企业</span>
           )}
-        </a>
+        </Link>
       </li>
       <li className="nav-item">
         <a href="common-user.html" className="nav-link text-reset text-decoration-none">

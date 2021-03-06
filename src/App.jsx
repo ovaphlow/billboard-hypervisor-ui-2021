@@ -5,6 +5,7 @@ import useAuth from './useAuth';
 import Home from './Home';
 import SignIn from './SignIn';
 import ToDoList from './ToDoList';
+import EmployerUserList from './EmployerUserList';
 
 export default function App() {
   return (
@@ -36,6 +37,10 @@ function Auth() {
 
         <Route path="/current-user/待处理">
           <ToDoList />
+        </Route>
+
+        <Route exact path="/employer-user">
+          <EmployerUserList />
         </Route>
       </Switch>
     </Router>

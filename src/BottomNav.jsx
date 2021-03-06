@@ -9,7 +9,7 @@ export default function BottomNav() {
       <span>Copyright © 2020-2021 哈尔滨乔汉科技有限公司. All rights reserved.</span>
       <ul className="list-inline pt-2">
         <li className="list-inline-item">
-          <a href="http://" className="text-reset text-decoration-none">
+          <a href="http://www.longzhaopin.com/wx/" className="text-reset text-decoration-none">
             <FontAwesomeIcon icon={faMobileAlt} fixedWidth size="lg" />
             求职微信小程序
           </a>
@@ -23,7 +23,7 @@ export default function BottomNav() {
       </ul>
       <span>
         <a
-          href="https://github.com/ovaphlow/hengda.billboard"
+          href="https://github.com/ovaphlow/billboard-hypervisor-ui-2021"
           className="text-muted text-decoration-none"
         >
           <FontAwesomeIcon icon={faCode} fixedWidth size="lg" />
