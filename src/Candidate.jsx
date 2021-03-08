@@ -1,12 +1,13 @@
 import React from 'react';
 import { useParams, useLocation } from 'react-router-dom';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faList } from '@fortawesome/free-solid-svg-icons';
+// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+// import { faList } from '@fortawesome/free-solid-svg-icons';
 
 import TopNav from './TopNav';
 import LeftNav from './LeftNav';
 import BottomNav from './BottomNav';
 import { reducer, useAuth } from './miscellaneous';
+import ComponentResume from './ComponentResume';
 
 const initial_candidate = {
   id: 0,
@@ -22,7 +23,6 @@ export default function Candidate() {
   const { id } = useParams();
   const location = useLocation();
   const [uuid, setUUID] = React.useState('');
-  const [resume_list, setResumeList] = React.useState([]);
 
   React.useEffect(() => {
     setUUID(new URLSearchParams(location.search).get('uuid'));
@@ -44,29 +44,14 @@ export default function Candidate() {
       });
   }, [id, uuid]);
 
-  React.useEffect(() => {
-    if (!id || !uuid) return;
-    fetch(`/api/resume/user/${id}?u_id=${uuid}`)
-      .then((response) => {
-        if (response.status !== 200) throw new Error('服务器错误');
-        else return response.json();
-      })
-      .then((data) => {
-        console.info(data);
-      })
-      .catch((err) => {
-        console.error(err.stack);
-      });
-  }, [id, uuid]);
-
   return (
-    <div className="d-flex flex-column h-100 w-100">
+    <div className="d-flex flex-column min-vh-100 w-100">
       <header>
         <TopNav component_option="" component_param_name={auth.name} />
       </header>
 
       <main className="flex-grow-1">
-        <div className="container-fluid h-100">
+        <div className="container-fluid">
           <div className="row h-100 d-flex justify-content-center">
             <div className="col-3 col-lg-2">
               <div className="card bg-dark h-100">
@@ -108,7 +93,7 @@ export default function Candidate() {
                   </nav>
                 </div>
 
-                <div className="card shadow bg-dark h-100">
+                <div className="card shadow bg-dark h-100 mb-4">
                   <div className="card-header d-flex justify-content-between">
                     <span className="lead">用户信息</span>
                     <div className="btn-group float-right">
@@ -155,96 +140,20 @@ export default function Candidate() {
                   </div>
 
                   <div className="card-body">
-                    <div className="row">
-                      <div className="col">
-                        <div className="mb-3">
-                          <label className="form-label">姓名</label>
-                          <input
-                            type="text"
-                            value={candidate.name}
-                            className="form-control input-underscore"
-                            onChange={(event) =>
-                              dispatch({
-                                type: 'set',
-                                payload: { key: 'name', value: event.target.value },
-                              })
-                            }
-                          />
-                        </div>
-                      </div>
+                    <dl className="row">
+                      <dt className="col-3">姓名</dt>
+                      <dd className="col-9">{candidate.name}</dd>
 
-                      <div className="col">
-                        <div className="mb-3">
-                          <label className="form-label">电话</label>
-                          <input
-                            type="tel"
-                            value={candidate.phone}
-                            className="form-control input-underscore"
-                            onChange={(event) => {
-                              dispatch({
-                                type: 'set',
-                                payload: { key: 'phone', value: event.target.value },
-                              });
-                            }}
-                          />
-                        </div>
-                      </div>
+                      <dt className="col-3">电话</dt>
+                      <dd className="col-9">{candidate.phone}</dd>
 
-                      <div className="col-6">
-                        <div className="mb-3">
-                          <label className="form-label">EMAIL</label>
-                          <input
-                            type="email"
-                            value={candidate.email}
-                            className="form-control input-underscore"
-                            onChange={(event) => {
-                              dispatch({
-                                type: 'set',
-                                payload: { key: 'email', value: event.target.value },
-                              });
-                            }}
-                          />
-                        </div>
-                      </div>
-                    </div>
+                      <dt className="col-3">EMAIL</dt>
+                      <dd className="col-9">{candidate.email}</dd>
+                    </dl>
                   </div>
                 </div>
 
-                <div className="card bg-dark shadow mt-3">
-                  <div className="card-header">
-                    <span className="lead">用户简历</span>
-                  </div>
-
-                  <div className="card-body">
-                    <div className="list-group">
-                      {resume_list.map((it) => (
-                        <a
-                          href={`resume.html#/${it.id}?master_id=${id}&uuid=${it.uuid}`}
-                          className="list-group-item list-group-item-action"
-                          key={it.id}
-                        >
-                          {it.qiwangzhiwei}
-                          <span className="float-right text-muted">{it.yixiangchengshi}</span>
-                        </a>
-                      ))}
-                    </div>
-                  </div>
-
-                  <div className="card-footer text-center">
-                    <div className="btn-group">
-                      <button
-                        type="button"
-                        className="btn btn-sm btn-info"
-                        onClick={() => {
-                          window.location = `delivery.html#/?user_id=${id}&user_uuid=${uuid}`;
-                        }}
-                      >
-                        <FontAwesomeIcon icon={faList} fixedWidth size="lg" />
-                        投递记录
-                      </button>
-                    </div>
-                  </div>
-                </div>
+                <ComponentResume id={id} uuid={uuid} />
               </div>
             </div>
           </div>

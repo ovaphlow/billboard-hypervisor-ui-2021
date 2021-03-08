@@ -28,7 +28,7 @@ export default function App() {
 function Auth() {
   const auth = useAuth();
 
-  if (!auth) window.location = 'non-auth/sign-in';
+  if (!auth) window.location = '/non-auth/sign-in';
 
   return (
     <Router>

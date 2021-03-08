@@ -43,7 +43,7 @@ export default function CandidateList() {
   };
 
   return (
-    <div className="d-flex flex-column h-100 w-100">
+    <div className="d-flex flex-column h-100 min-vh-100 w-100">
       <header>
         <TopNav component_option="" component_param_name={auth.name} />
       </header>
