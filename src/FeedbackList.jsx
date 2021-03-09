@@ -117,7 +117,7 @@ export default function FeedbackList() {
       .catch((err) => {
         console.error(err.stack);
       });
-  }, [flag, feedback_list_candidate]);
+  }, [flag, complaint_list_candidate]);
 
   React.useEffect(() => {
     if (!flag) return;
@@ -151,7 +151,7 @@ export default function FeedbackList() {
       .catch((err) => {
         console.error(err.stack);
       });
-  }, [flag, feedback_list_candidate]);
+  }, [flag, complaint_list_employer]);
 
   React.useEffect(() => {
     if (!flag) return;
