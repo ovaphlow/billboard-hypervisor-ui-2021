@@ -115,43 +115,17 @@ export default function LeftNav({ component_option }) {
       </li>
       <hr />
       <li className="nav-item">
-        <a href="complaint.html" className="nav-link text-reset text-decoration-none">
-          {component_option === '投诉' ? (
+        <Link to="/feedback" className="nav-link text-reset text-decoration-none">
+          {component_option === '投诉及意见反馈' ? (
             <strong>
               <FontAwesomeIcon icon={faChevronRight} fixedWidth size="lg" />
               {component_option}
               <FontAwesomeIcon icon={faChevronLeft} fixedWidth size="lg" />
             </strong>
           ) : (
-            <span>投诉</span>
+            <span>投诉及意见反馈</span>
           )}
-        </a>
-      </li>
-      <li className="nav-item">
-        <a href="feedback.html" className="nav-link text-reset text-decoration-none">
-          {component_option === '意见反馈' ? (
-            <strong>
-              <FontAwesomeIcon icon={faChevronRight} fixedWidth size="lg" />
-              {component_option}
-              <FontAwesomeIcon icon={faChevronLeft} fixedWidth size="lg" />
-            </strong>
-          ) : (
-            <span>意见反馈</span>
-          )}
-        </a>
-      </li>
-      <li className="nav-item">
-        <a href="report.html" className="nav-link text-reset text-decoration-none">
-          {component_option === '举报' ? (
-            <strong>
-              <FontAwesomeIcon icon={faChevronRight} fixedWidth size="lg" />
-              {component_option}
-              <FontAwesomeIcon icon={faChevronLeft} fixedWidth size="lg" />
-            </strong>
-          ) : (
-            <span>举报</span>
-          )}
-        </a>
+        </Link>
       </li>
       <hr />
       <li className="nav-item">

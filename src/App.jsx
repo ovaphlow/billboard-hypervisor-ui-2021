@@ -8,6 +8,7 @@ import ToDoList from './ToDoList';
 import EmployerList from './EmployerList';
 import CandidateList from './CandidateList';
 import Candidate from './Candidate';
+import FeedbackList from './FeedbackList';
 
 export default function App() {
   return (
@@ -51,6 +52,10 @@ function Auth() {
 
         <Route exact path="/employer">
           <EmployerList />
+        </Route>
+
+        <Route exact path="/feedback">
+          <FeedbackList />
         </Route>
       </Switch>
     </Router>
